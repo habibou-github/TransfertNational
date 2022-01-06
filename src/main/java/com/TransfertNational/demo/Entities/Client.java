@@ -67,32 +67,6 @@ public class Client{
 	
 	@OneToOne(mappedBy="client", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private Compte comptes;
-	
-
-
-
-	public Client(String clientId, String fullName, String titre, String identityType, String identityNumbre,
-			Boolean identityValidation, String paysEmission, String paysNationalite, String paysAdresse,
-			String profession, String adresseLegale, String ville, String GSM, String email, Date dateNaissance) {
-		
-		super();
-		
-		this.clientId = clientId;
-		this.fullName = fullName;
-		this.titre = titre;
-		this.identityType = identityType;
-		this.identityNumbre = identityNumbre;
-		this.identityValidation = identityValidation;
-		this.paysEmission = paysEmission;
-		this.paysNationalite = paysNationalite;
-		this.paysAdresse = paysAdresse;
-		this.profession = profession;
-		this.adresseLegale = adresseLegale;
-		this.ville = ville;
-		this.GSM = GSM;
-		this.email = email;
-		this.dateNaissance = dateNaissance;
-	}
 
 	
 	

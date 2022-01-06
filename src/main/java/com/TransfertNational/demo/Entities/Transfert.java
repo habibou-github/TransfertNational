@@ -2,11 +2,7 @@ package com.TransfertNational.demo.Entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="transferts")
@@ -37,17 +33,21 @@ public class Transfert {
 	
 	@Column(nullable=false)
 	private Boolean GAB_BOA = false;
-	
-	@Column
+
+	@ManyToOne
+	@JoinColumn(name="agentDonneurtId")
 	private Agent agentDonneur;
-	
-	@Column
+
+	@ManyToOne
+	@JoinColumn(name="agentBeneficaireId")
 	private Agent agentBeneficaire;
-	
-	@Column
+
+	@ManyToOne
+	@JoinColumn(name="clientDonneurId")
 	private Client clientDonneur;
-	
-	@Column
+
+	@ManyToOne
+	@JoinColumn(name="clientBeneficaireId")
 	private Client clientBeneficaire;
 	
 	@Column(nullable=false)
@@ -56,21 +56,6 @@ public class Transfert {
 	@Column(nullable=false)
 	private int delaiTransfert = 7;
 
-	public Transfert(String referenceTransfert, int pin, String etat, float montant, String motif, Boolean notification, Boolean GAB_BOA, Agent agentDonneur, Agent agentBeneficaire, Client clientDonneur, Client clientBeneficaire, Date dateTransfert, int delaiTransfert) {
-		this.referenceTransfert = referenceTransfert;
-		this.pin = pin;
-		this.etat = etat;
-		this.montant = montant;
-		this.motif = motif;
-		this.notification = notification;
-		this.GAB_BOA = GAB_BOA;
-		this.agentDonneur = agentDonneur;
-		this.agentBeneficaire = agentBeneficaire;
-		this.clientDonneur = clientDonneur;
-		this.clientBeneficaire = clientBeneficaire;
-		this.dateTransfert = dateTransfert;
-		this.delaiTransfert = delaiTransfert;
-	}
 
 
 	public long getId() {

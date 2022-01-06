@@ -1,4 +1,4 @@
-package com.TransfertNational.demo.Shared.Dto;
+package com.TransfertNational.demo.Shared.dto;
 
 import com.TransfertNational.demo.Entities.Client;
 
@@ -8,10 +8,12 @@ import java.util.Date;
 public class CompteDto implements Serializable {
 
     private long id;
+    private String compteId;
     private String numCompte;
     private float solde;
-    private Client client;
-    private Date dateCreation;
+    private Date DateCreation;
+    private String clientId;
+
 
     public long getId() {
         return id;
@@ -19,6 +21,14 @@ public class CompteDto implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCompteId() {
+        return compteId;
+    }
+
+    public void setCompteId(String compteId) {
+        this.compteId = compteId;
     }
 
     public String getNumCompte() {
@@ -37,19 +47,19 @@ public class CompteDto implements Serializable {
         this.solde = solde;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public Date getDateCreation() {
-        return dateCreation;
+        return DateCreation;
     }
 
     public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
+        DateCreation = dateCreation;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

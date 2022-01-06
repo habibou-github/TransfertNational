@@ -1,4 +1,4 @@
-package com.TransfertNational.demo.Shared.Dto;
+package com.TransfertNational.demo.Shared.dto;
 
 import com.TransfertNational.demo.Entities.Compte;
 

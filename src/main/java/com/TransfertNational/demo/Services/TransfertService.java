@@ -1,2 +1,4 @@
-package com.TransfertNational.demo.Services;public interface TransfertService {
+package com.TransfertNational.demo.Services;
+
+public interface TransfertService {
 }

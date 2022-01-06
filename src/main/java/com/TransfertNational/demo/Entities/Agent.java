@@ -22,18 +22,6 @@ public class Agent extends Client{
 	@JoinColumn(name="agenceId")
 	private Agence agence;
 
-	public Agent(String clientId, String fullName, String titre, String identityType, String identityNumbre,
-			Boolean identityValidation, String paysEmission, String paysNationalite, String paysAdresse,
-			String profession, String adresseLegale, String ville, String GSM, String email, Date dateNaissance,
-			String username, String encryptedPassword,Agence agence) {
-		
-		super(clientId, fullName, titre, identityType, identityNumbre, identityValidation, paysEmission,
-				paysNationalite, paysAdresse, profession, adresseLegale, ville, GSM, email, dateNaissance);
-		
-		this.username = username;
-		this.encryptedPassword = encryptedPassword;
-		this.agence = agence;
-	}
 
 	public String getUsername() {
 		return username;

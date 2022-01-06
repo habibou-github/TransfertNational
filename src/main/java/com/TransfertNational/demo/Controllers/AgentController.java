@@ -1,2 +1,8 @@
-package com.TransfertNational.demo.Controllers;public class AgentController {
+package com.TransfertNational.demo.Controllers;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/users")
+public class AgentController {
 }

@@ -1,2 +1,5 @@
-package com.TransfertNational.demo.Exceptions;public class AgenceException {
+package com.TransfertNational.demo.Exceptions;
+
+public class AgenceException extends RuntimeException {
+
 }

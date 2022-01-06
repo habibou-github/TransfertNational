@@ -17,8 +17,11 @@ public class Compte {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(nullable=false)
+	private String compteId;
+
+	@Column(nullable=false, unique=true)
 	private String numCompte;
 	
 	@Column(nullable=false)
@@ -33,14 +36,6 @@ public class Compte {
 	private Date dateCreation;
 
 
-	public Compte(String numCompte, float solde, Client client, Date dateCreation) {
-		super();
-		this.numCompte = numCompte;
-		this.solde = solde;
-		this.client = client;
-		this.dateCreation = dateCreation;
-	}
-
 
 	public long getId() {
 		return id;
@@ -49,6 +44,16 @@ public class Compte {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+
+	public String getCompteId() {
+		return compteId;
+	}
+
+
+	public void setCompteId(String compteId) {
+		this.compteId = compteId;
 	}
 
 

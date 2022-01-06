@@ -36,26 +36,8 @@ public class Agence {
     private boolean active = true;
 	
 	
-	@OneToMany(mappedBy="agent", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="agence", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Agent> agent;
-
-
-	
-	
-	
-	
-	public Agence(String adresseAgence, String villeAgence, String nomAgence, String telephoneAgence, boolean active,
-			List<Agent> agent) {
-		super();
-		this.adresseAgence = adresseAgence;
-		this.villeAgence = villeAgence;
-		this.nomAgence = nomAgence;
-		this.telephoneAgence = telephoneAgence;
-		this.active = active;
-		this.agent = agent;
-	}
-
-
 	
 	
 	
