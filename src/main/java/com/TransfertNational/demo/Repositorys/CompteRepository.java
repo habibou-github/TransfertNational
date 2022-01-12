@@ -3,14 +3,14 @@ package com.TransfertNational.demo.Repositorys;
 import com.TransfertNational.demo.Entities.Compte;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface CompteRepository extends PagingAndSortingRepository<Compte, Long> {
+public interface CompteRepository extends JpaRepository<Compte, Long> {
 
     Compte findByNumCompte(String numCompte);
     Compte findByCompteId(String compteId);
