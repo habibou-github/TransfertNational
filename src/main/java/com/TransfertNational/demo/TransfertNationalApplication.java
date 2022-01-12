@@ -44,7 +44,7 @@ public class TransfertNationalApplication implements CommandLineRunner {
 		clientEntity.setComptes(null);
 		
 		clientRepository.save(clientEntity);
-
+		
  */
 	}
 }
