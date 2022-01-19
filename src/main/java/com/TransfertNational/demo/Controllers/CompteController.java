@@ -1,5 +1,6 @@
 package com.TransfertNational.demo.Controllers;
 import com.TransfertNational.demo.Entities.Compte;
+import com.TransfertNational.demo.Repositorys.ClientRepository;
 import com.TransfertNational.demo.Services.CompteService;
 import com.TransfertNational.demo.Shared.dto.CompteDto;
 import org.springframework.beans.BeanUtils;
@@ -17,17 +18,20 @@ public class CompteController {
 
     @Autowired
     CompteService compteService;
+    @Autowired
+    ClientRepository clientRepository;
 
-    @GetMapping(path="/{compteId}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path="/id/{compteId}", produces=MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<Compte> getCompteByCompteId(@PathVariable String compteId) {
         CompteDto compteDto = compteService.getCompteByCompteId(compteId);
         Compte compte = new Compte();
         BeanUtils.copyProperties(compteDto, compte);
+        compte.setClient(clientRepository.findByClientId(compteDto.getClientId()));
         return new ResponseEntity<Compte>(compte, HttpStatus.OK);
     }
 
-    @GetMapping(path="/{numCompte}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path="/numCompte/{numCompte}", produces=MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<Compte> getCompteByNumCompte(@PathVariable String numCompte) {
         CompteDto compteDto = compteService.getCompteByNumCompte(numCompte);
@@ -37,12 +41,12 @@ public class CompteController {
     }
 
 
-    @GetMapping(produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<Compte>> getAllComptes(@RequestParam(value="page", defaultValue = "1") int page, @RequestParam(value="limit", defaultValue = "10")  int limit , @RequestParam(value="search", defaultValue = "") String search) {
+    @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Compte>> getAllComptes(@RequestParam(value="search", defaultValue = "") String search) {
 
         List<Compte> comptesEntities = new ArrayList<>();
 
-        List<CompteDto> comptes = compteService.getAllComptes(page, limit, search);
+        List<CompteDto> comptes = compteService.getAllComptes(search);
 
         for(CompteDto compteDto: comptes) {
 
@@ -56,8 +60,8 @@ public class CompteController {
     }
 
     @PostMapping(
-            consumes={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
-            produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
+            consumes=MediaType.APPLICATION_JSON_VALUE,
+            produces=MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Compte> createCompte(@RequestBody CompteDto compteDto) throws Exception{
 
@@ -70,7 +74,7 @@ public class CompteController {
         return new ResponseEntity<Compte>(compte, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path="/{numCompte}")
+    @DeleteMapping(path="/numCompte/{numCompte}")
     public ResponseEntity<Object> deleteCompteByNumCompte(@PathVariable String numCompte) {
 
         compteService.deleteCompteByNumCompte(numCompte);
@@ -78,10 +82,10 @@ public class CompteController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping(path="/{compteId}")
+    @DeleteMapping(path="/id/{compteId}")
     public ResponseEntity<Object> deleteCompteByCompteId(@PathVariable String compteId) {
 
-        compteService.deleteCompteByNumCompte(compteId);
+        compteService.deleteCompteByCompteId(compteId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

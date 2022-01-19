@@ -72,19 +72,15 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
-    public List<CompteDto> getAllComptes(int page, int limit, String search) {
-        page-=1;
+    public List<CompteDto> getAllComptes(String search) {
         List<CompteDto> comptesDto = new ArrayList<>();
-        Pageable pageableRequest = PageRequest.of(page, limit);
-        Page<Compte> comptePage;
+        List<Compte> comptes;
         if(search.isEmpty()) {
-            comptePage = compteRepository.findAllComptes(pageableRequest);
+            comptes = compteRepository.findAllComptes();
         }
         else {
-
-            comptePage = compteRepository.findAllComptesByCriteria(pageableRequest, search);
+            comptes = compteRepository.findAllComptesByCriteria(search);
         }
-        List<Compte> comptes = comptePage.getContent();
 
         for(Compte compteEntity: comptes) {
             CompteDto compteDto = new CompteDto();

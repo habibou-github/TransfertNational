@@ -39,8 +39,7 @@ public class Agence {
 	@OneToMany(mappedBy="agence", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Agent> agent;
 	
-	
-	
+
 	
 	public long getId() {
 		return id;

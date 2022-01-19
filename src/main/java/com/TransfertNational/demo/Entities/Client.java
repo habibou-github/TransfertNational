@@ -28,57 +28,18 @@ public class Client{
 	@Column(length=3)
 	private String titre; 	//  M. / Mme
 	
-	@Column(nullable=false, length=100)
-	private String identityType;
-	
-	@Column(nullable=false, length=10)
-	private String identityNumbre;
-	
-	@Column(nullable=false, length=100)
-	private Boolean identityValidation = true;
-	
-	@Column(nullable=false)
-	private String paysEmission;
-	
-	@Column(nullable=false)
-	private String paysNationalite;
-	
-	@Column(nullable=false)
-	private String paysAdresse;
-	
-	@Column(nullable=false)
-	private String profession;
-	
-	@Column(nullable=false)
-	private String adresseLegale;
-	
-	@Column(nullable=false)
-	private String ville;
-	
 	@Column(nullable=false)
 	private String GSM;
-	
-	@Column(nullable=false, length=120, unique=true)
-	private String email;
-	
-	@Column(nullable=false)
-	private Date dateNaissance;
-	
-	
+
 	@OneToOne(mappedBy="client", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private Compte comptes;
-
-	
 	
 
 
+	
 	public Compte getComptes() {
 		return comptes;
 	}
-
-
-
-
 
 	public void setComptes(Compte comptes) {
 		this.comptes = comptes;
@@ -88,262 +49,39 @@ public class Client{
 		return id;
 	}
 
-
-
-
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
-
-
 
 	public String getClientId() {
 		return clientId;
 	}
 
-
-
-
-
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
-
-
-
-
 
 	public String getFullName() {
 		return fullName;
 	}
 
-
-
-
-
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
-
-
-
 
 	public String getTitre() {
 		return titre;
 	}
 
-
-
-
-
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-
-
-
-
-
-	public String getIdentityType() {
-		return identityType;
-	}
-
-
-
-
-
-	public void setIdentityType(String identityType) {
-		this.identityType = identityType;
-	}
-
-
-
-
-
-	public String getIdentityNumbre() {
-		return identityNumbre;
-	}
-
-
-
-
-
-	public void setIdentityNumbre(String identityNumbre) {
-		this.identityNumbre = identityNumbre;
-	}
-
-
-
-
-
-	public Boolean getIdentityValidation() {
-		return identityValidation;
-	}
-
-
-
-
-
-	public void setIdentityValidation(Boolean identityValidation) {
-		this.identityValidation = identityValidation;
-	}
-
-
-
-
-
-	public String getPaysEmission() {
-		return paysEmission;
-	}
-
-
-
-
-
-	public void setPaysEmission(String paysEmission) {
-		this.paysEmission = paysEmission;
-	}
-
-
-
-
-
-	public String getPaysNationalite() {
-		return paysNationalite;
-	}
-
-
-
-
-
-	public void setPaysNationalite(String paysNationalite) {
-		this.paysNationalite = paysNationalite;
-	}
-
-
-
-
-
-	public String getPaysAdresse() {
-		return paysAdresse;
-	}
-
-
-
-
-
-	public void setPaysAdresse(String paysAdresse) {
-		this.paysAdresse = paysAdresse;
-	}
-
-
-
-
-
-	public String getProfession() {
-		return profession;
-	}
-
-
-
-
-
-	public void setProfession(String profession) {
-		this.profession = profession;
-	}
-
-
-
-
-
-	public String getAdresseLegale() {
-		return adresseLegale;
-	}
-
-
-
-
-
-	public void setAdresseLegale(String adresseLegale) {
-		this.adresseLegale = adresseLegale;
-	}
-
-
-
-
-
-	public String getVille() {
-		return ville;
-	}
-
-
-
-
-
-	public void setVille(String ville) {
-		this.ville = ville;
-	}
-
-
-
-
 
 	public String getGSM() {
 		return GSM;
 	}
 
-
-
-
-
 	public void setGSM(String gSM) {
 		GSM = gSM;
 	}
-
-
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-
-
-
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

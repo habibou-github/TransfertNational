@@ -10,7 +10,7 @@ public interface CompteService {
     CompteDto createCompte(CompteDto compte);
     CompteDto getCompteByNumCompte (String numCompte);
     CompteDto getCompteByCompteId (String compteId);
-    List<CompteDto> getAllComptes(int page, int limit, String search);
+    List<CompteDto> getAllComptes(String search);
     void deleteCompteByNumCompte(String numCompte);
     void deleteCompteByCompteId(String compteId);
 

@@ -15,7 +15,7 @@ public class Transfert {
 	@Column(nullable=false, length=13)
 	private String referenceTransfert;
 	
-	@Column(nullable=false, length=4)
+	@Column(nullable=true, length=4)
 	private int pin;
 	
 	@Column(nullable=false)
@@ -35,14 +35,6 @@ public class Transfert {
 	private Boolean GAB_BOA = false;
 
 	@ManyToOne
-	@JoinColumn(name="agentDonneurtId")
-	private Agent agentDonneur;
-
-	@ManyToOne
-	@JoinColumn(name="agentBeneficaireId")
-	private Agent agentBeneficaire;
-
-	@ManyToOne
 	@JoinColumn(name="clientDonneurId")
 	private Client clientDonneur;
 
@@ -52,11 +44,22 @@ public class Transfert {
 	
 	@Column(nullable=false)
 	private Date dateTransfert;
+
+	@Column(nullable=false)
+	private Date dateReception;
 	
 	@Column(nullable=false)
 	private int delaiTransfert = 7;
 
 
+
+	public Date getDateReception() {
+		return dateReception;
+	}
+
+	public void setDateReception(Date dateReception) {
+		this.dateReception = dateReception;
+	}
 
 	public long getId() {
 		return id;
@@ -120,22 +123,6 @@ public class Transfert {
 
 	public void setGAB_BOA(Boolean GAB_BOA) {
 		this.GAB_BOA = GAB_BOA;
-	}
-
-	public Agent getAgentDonneur() {
-		return agentDonneur;
-	}
-
-	public void setAgentDonneur(Agent agentDonneur) {
-		this.agentDonneur = agentDonneur;
-	}
-
-	public Agent getAgentBeneficaire() {
-		return agentBeneficaire;
-	}
-
-	public void setAgentBeneficaire(Agent agentBeneficaire) {
-		this.agentBeneficaire = agentBeneficaire;
 	}
 
 	public Client getClientDonneur() {

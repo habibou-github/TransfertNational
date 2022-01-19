@@ -25,26 +25,22 @@ public class TransfertNationalApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-/*
+
 		Client clientEntity = new Client();
 		clientEntity.setClientId("345TfzR3regr654Greg");
+		clientEntity.setTitre("M");
 		clientEntity.setFullName("hamza habibou");
-		clientEntity.setIdentityType("IdentityType");
-		clientEntity.setIdentityNumbre("4325342");
-		clientEntity.setAdresseLegale("safi kaouki");
-		clientEntity.setDateNaissance(new Date(System.currentTimeMillis()));
-		clientEntity.setPaysEmission("Maroc");
-		clientEntity.setPaysAdresse("safi");
-		clientEntity.setPaysNationalite("Maroccain");
-		clientEntity.setProfession("Developer");
-		clientEntity.setVille("SAFI");
 		clientEntity.setGSM("0606060606");
-		clientEntity.setEmail("email@ensas.com");
-		clientEntity.setIdentityValidation(true);
-		clientEntity.setComptes(null);
-		
+
 		clientRepository.save(clientEntity);
-		
- */
+
+		Client clientEntity2 = new Client();
+		clientEntity2.setClientId("alahoakbar12345");
+		clientEntity2.setTitre("Mme");
+		clientEntity2.setFullName("souad taliban");
+		clientEntity2.setGSM("0610203040");
+
+		clientRepository.save(clientEntity2);
+
 	}
 }

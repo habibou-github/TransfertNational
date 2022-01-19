@@ -1,16 +1,14 @@
 package com.TransfertNational.demo.Entities;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="agents")
-public class Agent extends Client{
-	
+public class Agent {
+
+	@Id
+	@GeneratedValue
+	private long id;
 
 	@Column(nullable=false)
 	private String username;
@@ -22,6 +20,13 @@ public class Agent extends Client{
 	@JoinColumn(name="agenceId")
 	private Agence agence;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

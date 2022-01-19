@@ -9,13 +9,11 @@ public interface ClientService {
 
     ClientDto createClient(ClientDto client);
 
-    ClientDto getClientByEmail(String email);
-
     ClientDto getClientByClientId(String clientId);
 
-    ClientDto updateClient(String id, ClientDto clientDto);
+    ClientDto updateClient(String clientId, ClientDto clientDto);
 
     void deleteClient(String clientId);
 
-    List<ClientDto> getClient(int page, int limit, String search, int status);
+    List<ClientDto> getClients(String search);
 }
