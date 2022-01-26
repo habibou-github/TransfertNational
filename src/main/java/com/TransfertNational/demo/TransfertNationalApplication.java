@@ -1,6 +1,8 @@
 package com.TransfertNational.demo;
 
+import com.TransfertNational.demo.Entities.Agence;
 import com.TransfertNational.demo.Entities.Client;
+import com.TransfertNational.demo.Repositorys.AgenceRepository;
 import com.TransfertNational.demo.Repositorys.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +20,8 @@ public class TransfertNationalApplication implements CommandLineRunner {
 
 	@Autowired
 	ClientRepository clientRepository;
+	@Autowired
+	AgenceRepository agenceRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TransfertNationalApplication.class, args);
@@ -41,6 +45,16 @@ public class TransfertNationalApplication implements CommandLineRunner {
 		clientEntity2.setGSM("0610203040");
 
 		clientRepository.save(clientEntity2);
+
+		Agence agenceEntity = new Agence();
+		agenceEntity.setId(1);
+		agenceEntity.setAdresseAgence("Kaouki");
+		agenceEntity.setActive(true);
+		agenceEntity.setVilleAgence("SAFI");
+		agenceEntity.setNomAgence("MASSIRA_AGENCE");
+		agenceEntity.setTelephoneAgence("0661968774");
+
+		agenceRepository.save(agenceEntity);
 
 	}
 }

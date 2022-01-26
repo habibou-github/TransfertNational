@@ -7,8 +7,8 @@ import java.io.Serializable;
 public class AgentDto extends ClientDto implements Serializable {
 
     private String username;
-    private String encryptedPassword;
-    private Agence agence;
+    private String password;
+    private Long agenceId;
 
     public String getUsername() {
         return username;
@@ -18,19 +18,19 @@ public class AgentDto extends ClientDto implements Serializable {
         this.username = username;
     }
 
-    public String getEncryptedPassword() {
-        return encryptedPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Agence getAgence() {
-        return agence;
+    public Long getAgenceId() {
+        return agenceId;
     }
 
-    public void setAgence(Agence agence) {
-        this.agence = agence;
+    public void setAgenceId(Long agenceId) {
+        this.agenceId = agenceId;
     }
 }

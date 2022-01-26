@@ -13,7 +13,7 @@ public class AgenceDto implements Serializable {
     private String nomAgence;
     private String telephoneAgence;
     private boolean active = true;
-    private List<Agent> agent;
+    private List<AgentDto> agentDto;
 
     public long getId() {
         return id;
@@ -63,11 +63,11 @@ public class AgenceDto implements Serializable {
         this.active = active;
     }
 
-    public List<Agent> getAgent() {
-        return agent;
+    public List<AgentDto> getAgents() {
+        return agentDto;
     }
 
-    public void setAgent(List<Agent> agent) {
-        this.agent = agent;
+    public void setAgent(List<AgentDto> agentDto) {
+        this.agentDto = agentDto;
     }
 }

@@ -51,7 +51,7 @@ public class ClientController {
     }
 
     @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Client>> getAllComptes(@RequestParam(value="search", defaultValue = "") String search) {
+    public ResponseEntity<List<Client>> getAllClients(@RequestParam(value="search", defaultValue = "") String search) {
 
         List<Client> clientsEntities = new ArrayList<>();
 
