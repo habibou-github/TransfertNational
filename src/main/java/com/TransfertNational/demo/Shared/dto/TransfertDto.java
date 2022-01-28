@@ -9,18 +9,18 @@ import java.util.Date;
 public class TransfertDto implements Serializable {
 
     private long id;
+    private String transfertId;
     private String referenceTransfert;
-    private int pin;
+    private String pin;
     private String etat = "A servir";
     private float montant;
     private String motif;
     private Boolean notification = false;
     private Boolean GAB_BOA = false;
-    private Agent agentDonneur;
-    private Agent agentBeneficaire;
-    private Client clientDonneur;
-    private Client clientBeneficaire;
+    private String clientDonneurId;
+    private String clientBeneficaireId;
     private Date dateTransfert;
+    private Date dateReception;
     private int delaiTransfert = 7;
 
     public long getId() {
@@ -31,6 +31,14 @@ public class TransfertDto implements Serializable {
         this.id = id;
     }
 
+    public String getTransfertId() {
+        return transfertId;
+    }
+
+    public void setTransfertId(String transfertId) {
+        this.transfertId = transfertId;
+    }
+
     public String getReferenceTransfert() {
         return referenceTransfert;
     }
@@ -39,11 +47,11 @@ public class TransfertDto implements Serializable {
         this.referenceTransfert = referenceTransfert;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 
@@ -87,36 +95,20 @@ public class TransfertDto implements Serializable {
         this.GAB_BOA = GAB_BOA;
     }
 
-    public Agent getAgentDonneur() {
-        return agentDonneur;
+    public String getClientDonneurId() {
+        return clientDonneurId;
     }
 
-    public void setAgentDonneur(Agent agentDonneur) {
-        this.agentDonneur = agentDonneur;
+    public void setClientDonneurId(String clientDonneurId) {
+        this.clientDonneurId = clientDonneurId;
     }
 
-    public Agent getAgentBeneficaire() {
-        return agentBeneficaire;
+    public String getClientBeneficaireId() {
+        return clientBeneficaireId;
     }
 
-    public void setAgentBeneficaire(Agent agentBeneficaire) {
-        this.agentBeneficaire = agentBeneficaire;
-    }
-
-    public Client getClientDonneur() {
-        return clientDonneur;
-    }
-
-    public void setClientDonneur(Client clientDonneur) {
-        this.clientDonneur = clientDonneur;
-    }
-
-    public Client getClientBeneficaire() {
-        return clientBeneficaire;
-    }
-
-    public void setClientBeneficaire(Client clientBeneficaire) {
-        this.clientBeneficaire = clientBeneficaire;
+    public void setClientBeneficaireId(String clientBeneficaireId) {
+        this.clientBeneficaireId = clientBeneficaireId;
     }
 
     public Date getDateTransfert() {
@@ -129,6 +121,14 @@ public class TransfertDto implements Serializable {
 
     public int getDelaiTransfert() {
         return delaiTransfert;
+    }
+
+    public Date getDateReception() {
+        return dateReception;
+    }
+
+    public void setDateReception(Date dateReception) {
+        this.dateReception = dateReception;
     }
 
     public void setDelaiTransfert(int delaiTransfert) {

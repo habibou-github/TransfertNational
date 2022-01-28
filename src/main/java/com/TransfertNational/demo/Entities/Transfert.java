@@ -11,12 +11,15 @@ public class Transfert {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
+	@Column(nullable=false)
+	private String transfertId;
+
 	@Column(nullable=false, length=13)
 	private String referenceTransfert;
 	
-	@Column(nullable=true, length=4)
-	private int pin;
+	@Column(length=4)
+	private String pin;
 	
 	@Column(nullable=false)
 	private String etat = "A servir";
@@ -28,10 +31,10 @@ public class Transfert {
 	@Column
 	private String motif;
 	
-	@Column(nullable=false)
+	@Column
 	private Boolean notification = false;
 	
-	@Column(nullable=false)
+	@Column
 	private Boolean GAB_BOA = false;
 
 	@ManyToOne
@@ -45,13 +48,20 @@ public class Transfert {
 	@Column(nullable=false)
 	private Date dateTransfert;
 
-	@Column(nullable=false)
+	@Column
 	private Date dateReception;
 	
 	@Column(nullable=false)
 	private int delaiTransfert = 7;
 
 
+	public String getTransfertId() {
+		return transfertId;
+	}
+
+	public void setTransfertId(String transfertId) {
+		this.transfertId = transfertId;
+	}
 
 	public Date getDateReception() {
 		return dateReception;
@@ -77,11 +87,11 @@ public class Transfert {
 		this.referenceTransfert = referenceTransfert;
 	}
 
-	public int getPin() {
+	public String getPin() {
 		return pin;
 	}
 
-	public void setPin(int pin) {
+	public void setPin(String pin) {
 		this.pin = pin;
 	}
 
