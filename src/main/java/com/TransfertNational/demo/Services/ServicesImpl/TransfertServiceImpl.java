@@ -84,15 +84,16 @@ public class TransfertServiceImpl implements TransfertService {
         Calendar n = Calendar.getInstance();
         n.setTime(now);
 
-        /*
         td.add(Calendar.DATE,2);
-        if(transfertEntity.getDelaiTransfert() == 2 && td.after(n))
+        if(transfertEntity.getDelaiTransfert() == 2 && td.before(n))
             transfertEntity.setEtat("Bloqué");
 
-         */
+        /*
         td.add(Calendar.MINUTE,1);
         if(td.before(n))
             transfertEntity.setEtat("Bloqué");
+
+         */
         return transfertEntity;
     }
 
