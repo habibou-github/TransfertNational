@@ -54,6 +54,16 @@ public class Transfert {
 	@Column(nullable=false)
 	private int delaiTransfert = 7;
 
+	@Column(nullable=false)
+	private String typeTransfert;
+
+	public String getTypeTransfert() {
+		return typeTransfert;
+	}
+
+	public void setTypeTransfert(String typeTransfert) {
+		this.typeTransfert = typeTransfert;
+	}
 
 	public String getTransfertId() {
 		return transfertId;

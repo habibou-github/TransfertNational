@@ -22,6 +22,15 @@ public class TransfertDto implements Serializable {
     private Date dateTransfert;
     private Date dateReception;
     private int delaiTransfert = 7;
+    private String typeTransfert;
+
+    public String getTypeTransfert() {
+        return typeTransfert;
+    }
+
+    public void setTypeTransfert(String typeTransfert) {
+        this.typeTransfert = typeTransfert;
+    }
 
     public long getId() {
         return id;

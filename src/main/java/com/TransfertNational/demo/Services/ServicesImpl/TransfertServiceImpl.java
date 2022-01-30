@@ -1,6 +1,9 @@
 package com.TransfertNational.demo.Services.ServicesImpl;
+import com.TransfertNational.demo.Entities.Client;
+import com.TransfertNational.demo.Entities.Compte;
 import com.TransfertNational.demo.Entities.Transfert;
 import com.TransfertNational.demo.Repositorys.ClientRepository;
+import com.TransfertNational.demo.Repositorys.CompteRepository;
 import com.TransfertNational.demo.Repositorys.TransfertRepository;
 import com.TransfertNational.demo.Services.TransfertService;
 import com.TransfertNational.demo.Shared.Utils;
@@ -20,6 +23,8 @@ public class TransfertServiceImpl implements TransfertService {
     @Autowired
     ClientRepository clientRepository;
     @Autowired
+    CompteRepository compteRepository;
+    @Autowired
     Utils util;
 
     @Override
@@ -27,14 +32,20 @@ public class TransfertServiceImpl implements TransfertService {
         Transfert transfertcheck = transfertRepository.findByReferenceTransfert(transfertDto.getReferenceTransfert());
         if(transfertcheck != null)
             throw new RuntimeException("Ce Transfert est déjà existe");
-
+        Date now = new Date(System.currentTimeMillis());
         Transfert transfertEntity = new Transfert();
         BeanUtils.copyProperties(transfertDto,transfertEntity);
+
+        if(transfertDto.getTypeTransfert().equals("Wallet")){
+            Compte compteBeneficaire = clientRepository.findByClientId(transfertDto.getClientBeneficaireId()).getComptes();
+            compteBeneficaire.setSolde(compteBeneficaire.getSolde() + transfertDto.getMontant());
+            transfertEntity.setEtat("Servie");
+            transfertEntity.setDateReception(now);
+        }
         transfertEntity.setClientDonneur(clientRepository.findByClientId(transfertDto.getClientDonneurId()));
 
         transfertEntity.setClientBeneficaire(clientRepository.findByClientId(transfertDto.getClientBeneficaireId()));
 
-        Date now = new Date(System.currentTimeMillis());
         transfertEntity.setDateTransfert(now);
         transfertEntity.setTransfertId(util.generateStringId(30));
         transfertEntity.setReferenceTransfert("837" + util.generateNumbre(10));
@@ -68,6 +79,7 @@ public class TransfertServiceImpl implements TransfertService {
         Date now = new Date(System.currentTimeMillis());
         transfertEntity.setEtat("Servie");
         transfertEntity.setDateReception(now);
+        transfertRepository.save(transfertEntity);
 
         return transfertEntity;
     }
@@ -118,6 +130,5 @@ public class TransfertServiceImpl implements TransfertService {
         List<Transfert> transfertList = transfertRepository.getAllTransfertByEtat(etat);
         return transfertList;
     }
-
 
 }
