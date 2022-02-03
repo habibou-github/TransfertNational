@@ -114,7 +114,7 @@ public class TransfertController {
         return new ResponseEntity<Transfert>(transfertEntity, HttpStatus.CREATED);
     }
 
-    @PostMapping(path="/toWalet",
+    @PostMapping(path="/transfertMultiple",
             consumes= MediaType.APPLICATION_JSON_VALUE,
             produces=MediaType.APPLICATION_JSON_VALUE
     )

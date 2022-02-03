@@ -29,11 +29,12 @@ public class ClientServiceImpl implements ClientService {
             throw new RuntimeException("Ce Client ( "+ client.getFullName() +" ) est déjà existe");
         Client clientEntity = new Client();
         BeanUtils.copyProperties(client,clientEntity);
+        if(!client.getGSM().isEmpty()) {
+            Compte compteEntity = compteRepository.findByNumCompte(client.getNumCompte());
+            clientEntity.setComptes(compteEntity);
+        }
 
-        Compte compteEntity = compteRepository.findByNumCompte(client.getNumCompte());
-        clientEntity.setComptes(compteEntity);
-
-        client.setClientId(util.generateStringId(30));
+        clientEntity.setClientId(util.generateStringId(30));
 
         clientRepository.save(clientEntity);
 
