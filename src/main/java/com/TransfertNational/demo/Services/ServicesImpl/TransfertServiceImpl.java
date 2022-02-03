@@ -7,11 +7,14 @@ import com.TransfertNational.demo.Repositorys.CompteRepository;
 import com.TransfertNational.demo.Repositorys.TransfertRepository;
 import com.TransfertNational.demo.Services.TransfertService;
 import com.TransfertNational.demo.Shared.Utils;
+import com.TransfertNational.demo.Shared.dto.ClientDto;
 import com.TransfertNational.demo.Shared.dto.TransfertDto;
+import com.TransfertNational.demo.Shared.dto.TransfertMultipleDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -128,6 +131,67 @@ public class TransfertServiceImpl implements TransfertService {
     @Override
     public List<Transfert> getAllTransfertByEtat(String etat) {
         List<Transfert> transfertList = transfertRepository.getAllTransfertByEtat(etat);
+        return transfertList;
+    }
+
+    @Override
+    public List<Transfert> getAllTransfertByClientBeneficaire(String clientBeneficaireId) {
+        List<Transfert> transfertList = transfertRepository.getAllTransfertByClientBeneficaire(clientBeneficaireId);
+        return transfertList;
+    }
+
+    @Override
+    public List<Transfert> getAllTransfertByClientDonneur(String clientDonneurId) {
+        List<Transfert> transfertList = transfertRepository.getAllTransfertByClientDonneur(clientDonneurId);
+        return transfertList;
+    }
+
+    @Override
+    public Transfert transfertWaletToWalet(TransfertDto transfertDto) {
+
+        Transfert transfertcheck = transfertRepository.findByReferenceTransfert(transfertDto.getReferenceTransfert());
+        if(transfertcheck != null)
+            throw new RuntimeException("Ce Transfert est déjà existe");
+        Compte compteBeneficaire = clientRepository.findByClientId(transfertDto.getClientBeneficaireId()).getComptes();
+        Compte compteDoneur = clientRepository.findByClientId(transfertDto.getClientDonneurId()).getComptes();
+        if(compteDoneur.getSolde() < transfertDto.getMontant())
+            throw new RuntimeException("vous ne pouvez pas envoyer un montant superier a votre Solde = " + compteDoneur.getSolde() + "MAD");
+
+        Date now = new Date(System.currentTimeMillis());
+        Transfert transfertEntity = new Transfert();
+        BeanUtils.copyProperties(transfertDto,transfertEntity);
+
+        compteBeneficaire.setSolde(compteBeneficaire.getSolde() + transfertDto.getMontant());
+        compteDoneur.setSolde(compteDoneur.getSolde() - transfertDto.getMontant());
+
+        transfertEntity.setClientDonneur(clientRepository.findByClientId(transfertDto.getClientDonneurId()));
+
+        transfertEntity.setClientBeneficaire(clientRepository.findByClientId(transfertDto.getClientBeneficaireId()));
+
+        transfertEntity.setEtat("Servie");
+        transfertEntity.setDateReception(now);
+        transfertEntity.setDateTransfert(now);
+        transfertEntity.setTransfertId(util.generateStringId(30));
+        transfertRepository.save(transfertEntity);
+        return transfertEntity;
+    }
+
+    @Override
+    public List<Transfert> creatTransfertMultiple(TransfertMultipleDto transfertMultipleDto) {
+        TransfertDto transfertDto = new TransfertDto();
+        BeanUtils.copyProperties(transfertMultipleDto,transfertDto);
+        List<String> clientsBeneficairesIdList = transfertMultipleDto.getClientBeneficaireIdList();
+        List<Transfert> transfertList = new ArrayList<>();
+
+        for(String cId : clientsBeneficairesIdList){
+            transfertDto.setClientBeneficaireId(cId);
+            Client clientBeneficaire = clientRepository.findByClientId(cId);
+            Transfert transfert = creatTransfert(transfertDto);
+            transfert.setClientBeneficaire(clientBeneficaire);
+            transfertList.add(transfert);
+            transfertRepository.save(transfert);
+        }
+
         return transfertList;
     }
 

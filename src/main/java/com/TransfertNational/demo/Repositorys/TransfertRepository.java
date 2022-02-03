@@ -16,4 +16,10 @@ public interface TransfertRepository extends JpaRepository<Transfert, Long> {
 
     @Query(value="SELECT * FROM transferts WHERE etat LIKE %:etat%", nativeQuery=true)
     List<Transfert> getAllTransfertByEtat(@Param("etat") String etat);
+
+    @Query(value="SELECT * FROM transferts WHERE clientBeneficaireId = :clientId", nativeQuery=true)
+    List<Transfert> getAllTransfertByClientBeneficaire(@Param("clientId") String clientId);
+
+    @Query(value="SELECT * FROM transferts WHERE clientDonneurId = :clientId", nativeQuery=true)
+    List<Transfert> getAllTransfertByClientDonneur(@Param("clientId") String clientId);
 }

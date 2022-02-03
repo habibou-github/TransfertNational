@@ -15,7 +15,7 @@ public class Transfert {
 	@Column(nullable=false)
 	private String transfertId;
 
-	@Column(nullable=false, length=13)
+	@Column(length=13)
 	private String referenceTransfert;
 	
 	@Column(length=4)
@@ -23,8 +23,7 @@ public class Transfert {
 	
 	@Column(nullable=false)
 	private String etat = "A servir";
-	
-	
+
 	@Column(nullable=false)
 	private float montant;
 	
@@ -51,7 +50,7 @@ public class Transfert {
 	@Column
 	private Date dateReception;
 	
-	@Column(nullable=false)
+	@Column
 	private int delaiTransfert = 7;
 
 	@Column(nullable=false)

@@ -7,6 +7,7 @@ import com.TransfertNational.demo.Services.TransfertService;
 import com.TransfertNational.demo.Shared.dto.ClientDto;
 import com.TransfertNational.demo.Shared.dto.CompteDto;
 import com.TransfertNational.demo.Shared.dto.TransfertDto;
+import com.TransfertNational.demo.Shared.dto.TransfertMultipleDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class TransfertController {
         return new ResponseEntity<Transfert>(updatedTransfert, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(path="/id/{transfertId}", produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/transfertId/{transfertId}", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Transfert> getTransfertByTransfertId(@PathVariable String transfertId) {
         Transfert transfertEntity = transfertService.getTransfertByTransfertId(transfertId);
 
@@ -84,5 +85,46 @@ public class TransfertController {
         return new ResponseEntity<List<Transfert>>(transfertEntityList, HttpStatus.OK);
     }
 
+    @GetMapping(path="/clientBeneficaireId/{clientBeneficaireId}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Transfert>> getAllTransfertByClientBeneficaire(@PathVariable String clientBeneficaireId) {
+        List<Transfert> transfertEntityList = transfertService.getAllTransfertByClientBeneficaire(clientBeneficaireId);
 
+        return new ResponseEntity<List<Transfert>>(transfertEntityList, HttpStatus.OK);
+    }
+
+    @GetMapping(path="/clientDonneurId/{clientDonneurId}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Transfert>> getAllTransfertByClientDonneur(@PathVariable String clientDonneurId) {
+        List<Transfert> transfertEntityList = transfertService.getAllTransfertByClientDonneur(clientDonneurId);
+
+        return new ResponseEntity<List<Transfert>>(transfertEntityList, HttpStatus.OK);
+    }
+
+
+    @PostMapping(path="/toWalet",
+            consumes= MediaType.APPLICATION_JSON_VALUE,
+            produces=MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Transfert> transfertWaletToWalet(@RequestBody TransfertDto transfertDto) throws Exception{
+        if(transfertDto.getClientDonneurId().isEmpty() || transfertDto.getClientBeneficaireId().isEmpty()
+                || transfertDto.getMontant()<100)
+            throw new RuntimeException("vous oublier des champs obligatoire");
+
+        Transfert transfertEntity = transfertService.transfertWaletToWalet(transfertDto);
+
+        return new ResponseEntity<Transfert>(transfertEntity, HttpStatus.CREATED);
+    }
+
+    @PostMapping(path="/toWalet",
+            consumes= MediaType.APPLICATION_JSON_VALUE,
+            produces=MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Transfert>> creatTransfertMultiple(@RequestBody TransfertMultipleDto transfertMultipleDto) throws Exception{
+        if(transfertMultipleDto.getClientDonneurId().isEmpty() || transfertMultipleDto.getClientBeneficaireIdList().isEmpty()
+                || transfertMultipleDto.getMontant()<100)
+            throw new RuntimeException("vous oublier des champs obligatoire");
+
+        List<Transfert> transfertEntity = transfertService.creatTransfertMultiple(transfertMultipleDto);
+
+        return new ResponseEntity<List<Transfert>>(transfertEntity, HttpStatus.CREATED);
+    }
 }
